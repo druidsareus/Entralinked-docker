@@ -1,0 +1,15 @@
+[Unit]
+Description=Entralinked Java Service
+After=network.target
+
+[Service]
+WorkingDirectory=/root/
+ExecStart=/opt/java/openjdk/bin/java -jar /root/entralinked/entralinked.jar disablegui
+Restart=always
+RestartSec=5
+SuccessExitStatus=143
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

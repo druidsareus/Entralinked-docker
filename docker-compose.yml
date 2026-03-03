@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  entralinked:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: Entralinked-docker-server
+    ports:
+      # DNS Server
+      - "53:53/tcp"
+      - "53:53/udp"
+      # HTTP/HTTPS Dashboard
+      - "80:80"
+      - "443:443"
+      # Alternative HTTP
+      - "8080:8080"
+      # GameSpy Server
+      - "29900:29900"
+    volumes:
+      # Persist game data across container recreations
+      - entralinked-data:/root/entralinked
+    environment:
+      # Optional: Add custom Java options
+      JAVA_OPTS: "-Xmx512m"
+    privileged: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/dashboard/profile.html"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  entralinked-data:
+    driver: local
