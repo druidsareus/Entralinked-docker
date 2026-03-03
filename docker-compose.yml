@@ -1,10 +1,12 @@
-version: '3.8'
-
 services:
   entralinked:
     build:
       context: .
       dockerfile: Dockerfile
+      cache_from:
+        - type=registry,ref=entralinked:latest
+      cache_to:
+        - type=inline
     container_name: Entralinked-docker-server
     ports:
       # DNS Server
@@ -21,12 +23,12 @@ services:
       # Persist game data across container recreations
       - entralinked-data:/root/entralinked
     environment:
-      # Optional: Add custom Java options
-      JAVA_OPTS: "-Xmx512m"
+      # Optimize Java heap usage
+      JAVA_OPTS: "-Xmx512m -Xms256m"
     privileged: true
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/dashboard/profile.html"]
+      test: ["CMD", "systemctl", "is-active", "entralinked"]
       interval: 30s
       timeout: 5s
       retries: 3
