@@ -1,0 +1,5 @@
+# Syntax for buildx/BuildKit
+syntax=docker/dockerfile:1.4
+
+# Optional: Enable inline cache for faster local builds
+# Use with: DOCKER_BUILDKIT=1 docker build --build-arg BUILDKIT_INLINE_CACHE=1 .

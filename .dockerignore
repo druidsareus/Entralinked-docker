@@ -1,0 +1,54 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+README.md
+CONTRIBUTING.md
+SETUP.md
+QUICKREF.md
+GITHUB_SETUP.md
+REPOSITORY_SUMMARY.md
+LICENSE
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.circleci
+
+# IDE and editors
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+.env.local
+.env.*.local
+
+# Build artifacts and cache
+node_modules
+__pycache__
+*.pyc
+.gradle
+build
+dist
+target
+
+# Docker/system
+.dockerignore
+Dockerfile*
+docker-compose*.yml
+.docker
+
+# Test files
+test/
+tests/
+*.test
+
+# Temporary files
+tmp/
+temp/
+.tmp
